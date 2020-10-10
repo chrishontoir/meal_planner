@@ -1,17 +1,15 @@
 {
     "extends": [
-        "standard",
-        "plugin:mocha/recommended"
+        "standard"
     ],
     "rules": {
         "semi": ["error", "always"],
         "quotes": ["error", "single"]
     },
-    "plugins": [
-        "mocha"
-    ],
     "globals": {
+        "before": true,
         "beforeEach": true,
+        "after": true,
         "afterEach": true,
         "describe": true,
         "it": true
