@@ -1,8 +1,8 @@
 const td = require('testdouble');
 const assert = require('assert');
 
-describe('app.js', function () {
-  beforeEach(function () {
+describe('app.js', () => {
+  beforeEach(() => {
     console.log = message => { this.log = message; };
 
     this.app = {
@@ -37,25 +37,25 @@ describe('app.js', function () {
   });
   afterEach(td.reset);
 
-  it('should create a new Koa app on port 3000', function () {
+  it('should create a new Koa app on port 3000', () => {
     td.verify(this.app.listen('3000', td.matchers.anything()));
   });
 
-  it('should set up the logger', function () {
+  it('should set up the logger', () => {
     td.verify(this.middleware.logger(this.app));
   });
 
-  it('should set up the middleware', function () {
+  it('should set up the middleware', () => {
     td.verify(this.app.use(this.middleware.elapsedTime));
     td.verify(this.app.use(this.middleware.responseLogger));
   });
 
-  it('should set up the router', function () {
+  it('should set up the router', () => {
     td.verify(this.app.use(this.router.routes()));
     td.verify(this.app.use(this.router.allowedMethods()));
   });
 
-  it('should console log that the server has started', async function () {
+  it('should console log that the server has started', () => {
     assert.deepStrictEqual(this.log, 'Server started on port 3000');
   });
 });
