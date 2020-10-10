@@ -3,9 +3,10 @@ const { LOG_TO_FILE, FORMAT_LOGS } = process.env;
 
 const generateLog = (ctx, code, message, data) => {
   const origin = ctx.API_NAME;
+  const method = ctx.request.method;
   const endpoint = ctx.request.path;
   const timestamp = new Date();
-  const log = { code, message, origin, endpoint, timestamp, data };
+  const log = { code, message, origin, method, endpoint, timestamp, data };
   if (LOG_TO_FILE === 'true') {
     fs.appendFileSync('./app.log', JSON.stringify(log) + '\n');
   } else {

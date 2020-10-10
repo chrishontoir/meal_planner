@@ -1,11 +1,11 @@
 const Router = require('@koa/router');
-const { meals } = require('./controllers');
+const { food } = require('./controllers');
 
 const router = new Router();
 
 router.get(
-  '/get-meals',
-  meals.get
+  '/food',
+  food.get
 );
 
 module.exports = router;

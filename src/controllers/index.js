@@ -1,3 +1,3 @@
 module.exports = {
-  meals: require('./meals')
+  food: require('./food')
 };
