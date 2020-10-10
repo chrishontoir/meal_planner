@@ -1,0 +1,3 @@
+{
+    "port": "&&MEAL_PLANNER_API_PORT&&"
+}
