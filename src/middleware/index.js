@@ -1,4 +1,4 @@
 module.exports = {
-    elapsedTime: require('./elapsed-time'),
-    logger: require('./logger')
+  elapsedTime: require('./elapsed-time'),
+  logger: require('./logger')
 };

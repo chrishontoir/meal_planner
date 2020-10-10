@@ -1,5 +1,8 @@
 # Dependencies
 node_modules
 
-# Log files
+# Logs
 *.log
+
+# Reports
+coverage
