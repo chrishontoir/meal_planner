@@ -4,8 +4,8 @@ const { meals } = require('./controllers');
 const router = new Router();
 
 router.get(
-    '/get-meals',
-    meals.get
+  '/get-meals',
+  meals.get
 );
 
 module.exports = router;

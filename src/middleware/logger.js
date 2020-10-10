@@ -11,7 +11,8 @@ const generateLog = (ctx, code, message, data) => {
   } else {
     console.log(FORMAT_LOGS === 'true'
       ? JSON.stringify(log, null, 4)
-      : JSON.stringify(log))
+      : JSON.stringify(log)
+    );
   }
 };
 
