@@ -5,7 +5,7 @@
         "src/**/*.js"
     ],
     "reporter": [
-        "text-summary",
+        "text",
         "lcov"
     ],
     "branches": 100,
