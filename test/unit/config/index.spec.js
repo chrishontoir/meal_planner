@@ -13,7 +13,7 @@ describe('config / index.js', () => {
   });
 
   describe('when NODE_ENV is dev', () => {
-    beforeEach(() => {
+    before(() => {
       process.env.NODE_ENV = 'dev';
       this.sut = require('../../../src/config');
     });
@@ -23,7 +23,7 @@ describe('config / index.js', () => {
   });
 
   describe('when NODE_ENV is test', () => {
-    beforeEach(() => {
+    before(() => {
       process.env.NODE_ENV = 'test';
       this.sut = require('../../../src/config');
     });
@@ -33,7 +33,7 @@ describe('config / index.js', () => {
   });
 
   describe('when NODE_ENV is prod', () => {
-    beforeEach(() => {
+    before(() => {
       process.env.NODE_ENV = 'prod';
       this.sut = require('../../../src/config');
     });
@@ -43,7 +43,7 @@ describe('config / index.js', () => {
   });
 
   describe('when NODE_ENV is undefined', () => {
-    beforeEach(() => {
+    before(() => {
       process.env.NODE_ENV = undefined;
       this.sut = require('../../../src/config');
     });
@@ -53,7 +53,7 @@ describe('config / index.js', () => {
   });
 
   describe('when NODE_ENV is anything else', () => {
-    beforeEach(() => {
+    before(() => {
       process.env.NODE_ENV = 'abcdefg';
       this.sut = require('../../../src/config');
     });
