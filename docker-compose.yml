@@ -1,0 +1,14 @@
+version: "3.8"
+
+services:
+  api:
+    build:
+      context: .
+      args:
+        GITHUB_TOKEN: $GITHUB_TOKEN
+    ports:
+      - 3000:3000
+    command: 'yarn dev'
+    container_name: 'meal_planner_api'
+    volumes:
+      - ./src:/app/src
