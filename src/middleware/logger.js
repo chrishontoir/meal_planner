@@ -1,18 +1,24 @@
 const fs = require('fs');
+const { LOG_TO_FILE, FORMAT_LOGS } = process.env;
 
 const generateLog = (ctx, code, message, data) => {
-  const { LOG_TO_FILE, FORMAT_LOGS } = process.env;
   const origin = ctx.API_NAME;
+  const endpoint = ctx.request.path;
   const timestamp = new Date();
-  const log = { code, message, origin, data, timestamp };
+  const log = { code, message, origin, endpoint, timestamp, data };
   if (LOG_TO_FILE === 'true') {
     fs.appendFileSync('./app.log', JSON.stringify(log) + '\n');
   } else {
-    console.log(FORMAT_LOGS === 'true' ? log : JSON.stringify(log));
+    console.log(FORMAT_LOGS === 'true'
+      ? JSON.stringify(log, null, 4)
+      : JSON.stringify(log))
   }
 };
 
 const logger = (app) => {
+  if (LOG_TO_FILE === 'true' && fs.existsSync('./app.log')) {
+    fs.unlinkSync('./app.log');
+  }
   app.context.log = {
     apiElapsedTime: (ctx, start, end) => {
       const elapsed = end - start;

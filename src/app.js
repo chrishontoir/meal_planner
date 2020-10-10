@@ -1,10 +1,17 @@
 const Koa = require('koa');
-const { logger } = require('./middleware');
+const { elapsedTime, logger, responseLogger } = require('./middleware');
 const { port } = require('./config');
+const router = require('./router');
 
 const app = new Koa();
 
 logger(app);
+
+app.use(elapsedTime);
+app.use(responseLogger);
+
+app.use(router.routes());
+app.use(router.allowedMethods());
 
 app.listen(port, () => {
   console.log(`Server started on port ${port}`);
