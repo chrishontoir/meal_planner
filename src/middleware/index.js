@@ -1,5 +1,5 @@
 module.exports = {
   elapsedTime: require('./elapsed-time'),
   logger: require('./logger'),
-  responseLogger: require('./response-logger')
+  responseHandler: require('./response-handler')
 };
