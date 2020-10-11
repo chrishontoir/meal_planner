@@ -1,5 +1,5 @@
 {
     "**/*.js": [
-        "eslint --fix './src/**/*.js' './test/**/*.js'"
+        "yarn run lint"
     ]
 }
