@@ -1,18 +1,23 @@
 const Koa = require('koa');
+
 const { elapsedTime, logger, responseHandler } = require('./middleware');
 const { port } = require('./config');
 const router = require('./router');
 
-const app = new Koa();
+const setup = () => {
+  const app = new Koa();
 
-logger(app);
+  logger(app);
 
-app.use(elapsedTime);
-app.use(responseHandler);
+  app.use(elapsedTime);
+  app.use(responseHandler);
 
-app.use(router.routes());
-app.use(router.allowedMethods());
+  app.use(router.routes());
+  app.use(router.allowedMethods());
 
-app.listen(port, () => {
-  console.log(`Server started on port ${port}`);
-});
+  app.listen(port, () => {
+    console.log(`Server started on port ${port}`);
+  });
+};
+
+module.exports = setup;

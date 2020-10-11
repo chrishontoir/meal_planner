@@ -7,7 +7,7 @@
     "start": "NODE_ENV=dev LOG_TO_FILE=true FORMAT_LOGS=true node src/app.js",
     "dev": "NODE_ENV=dev nodemon --watch './src/**/*' src/app.js",
     "docker": "docker-compose up --build api",
-    "test-unit": "NODE_ENV=test mocha './test/unit/**/*'",
+    "test-unit": "NODE_ENV=test mocha --colors --timeout 10000 './test/unit/**/*'",
     "test-coverage": "NODE_ENV=test nyc yarn run test-unit",
     "report-coverage": "open ./coverage/lcov-report/index.html",
     "lint": "eslint --fix './src/**/*.js' './test/**/*.js'"
@@ -41,7 +41,8 @@
   },
   "lint-staged": {
     "**/*.js": [
-      "yarn run lint"
+      "yarn run lint",
+      "yarn run test-unit"
     ]
   }
 }

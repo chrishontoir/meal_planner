@@ -2,18 +2,14 @@ const td = require('testdouble');
 const assert = require('assert');
 
 describe('app.js', () => {
-  beforeEach(() => {
+  before(() => {
     console.log = message => { this.log = message; };
 
-    this.app = {
-      listen: td.function(),
-      use: td.function()
-    };
-    td.when(this.app.listen('3000')).thenCallback();
+    const Koa = td.constructor(['listen', 'use']);
+    td.replace('koa', Koa);
 
-    this.koa = td.function();
-    td.replace('koa', this.koa);
-    td.when(this.koa()).thenReturn(this.app);
+    this.app = new Koa();
+    td.when(this.app.listen('3000')).thenCallback();
 
     this.middleware = {
       elapsedTime: td.function(),
@@ -34,8 +30,9 @@ describe('app.js', () => {
     td.replace('../../src/router', this.router);
 
     this.sut = require('../../src/app');
+    this.sut();
   });
-  afterEach(td.reset);
+  after(td.reset);
 
   it('should create a new Koa app on port 3000', () => {
     td.verify(this.app.listen('3000', td.matchers.anything()));
