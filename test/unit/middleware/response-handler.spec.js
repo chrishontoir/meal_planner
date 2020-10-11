@@ -7,7 +7,7 @@ const generateError = (status, data) => {
   error.reason = data?.reason;
   error.stack = data?.stack;
   return error;
-}
+};
 
 describe('middleware / response-handler.js', () => {
   beforeEach(() => {
@@ -75,9 +75,9 @@ describe('middleware / response-handler.js', () => {
 
   describe('when error.status is 400', () => {
     beforeEach(async () => {
-      td.when(this.next()).thenThrow(generateError(400, { reason: 'Bad request reason' }))
+      td.when(this.next()).thenThrow(generateError(400, { reason: 'Bad request reason' }));
       await this.sut(this.ctx, this.next);
-    })
+    });
 
     it('should set ctx.body to the Bad Request response', () => {
       assert.deepStrictEqual(this.ctx.body, { code: '010', message: 'Bad Request', status: 400 });
@@ -86,13 +86,13 @@ describe('middleware / response-handler.js', () => {
     it('should call ctx.log.badRequest()', () => {
       td.verify(this.ctx.log.badRequest(this.ctx, 'Bad request reason'));
     });
-  })
+  });
 
   describe('when error.status is 401', () => {
     beforeEach(async () => {
-      td.when(this.next()).thenThrow(generateError(401))
+      td.when(this.next()).thenThrow(generateError(401));
       await this.sut(this.ctx, this.next);
-    })
+    });
 
     it('should set ctx.body to the Unauthorized response', () => {
       assert.deepStrictEqual(this.ctx.body, { code: '011', message: 'Unauthorized', status: 401 });
@@ -101,13 +101,13 @@ describe('middleware / response-handler.js', () => {
     it('should call ctx.log.unauthorized()', () => {
       td.verify(this.ctx.log.unauthorized(this.ctx));
     });
-  })
+  });
 
   describe('when error.status is 403', () => {
     beforeEach(async () => {
-      td.when(this.next()).thenThrow(generateError(403))
+      td.when(this.next()).thenThrow(generateError(403));
       await this.sut(this.ctx, this.next);
-    })
+    });
 
     it('should set ctx.body to the Forbidden response', () => {
       assert.deepStrictEqual(this.ctx.body, { code: '012', message: 'Forbidden', status: 403 });
@@ -116,13 +116,13 @@ describe('middleware / response-handler.js', () => {
     it('should call ctx.log.forbidden()', () => {
       td.verify(this.ctx.log.forbidden(this.ctx));
     });
-  })
+  });
 
   describe('when error.status is anything else', () => {
     beforeEach(async () => {
-      td.when(this.next()).thenThrow(generateError())
+      td.when(this.next()).thenThrow(generateError());
       await this.sut(this.ctx, this.next);
-    })
+    });
 
     it('should set ctx.body to the Internal Server Error response', () => {
       assert.deepStrictEqual(this.ctx.body, { code: '013', message: 'Internal Server Error', status: 500 });
@@ -131,5 +131,5 @@ describe('middleware / response-handler.js', () => {
     it('should call ctx.log.internalServerError()', () => {
       td.verify(this.ctx.log.internalServerError(this.ctx, undefined, undefined));
     });
-  })
+  });
 });
