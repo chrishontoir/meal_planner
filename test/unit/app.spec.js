@@ -18,7 +18,7 @@ describe('app.js', () => {
     this.middleware = {
       elapsedTime: td.function(),
       logger: td.function(),
-      responseLogger: td.function()
+      responseHandler: td.function()
     };
     td.replace('../../src/middleware', this.middleware);
 
@@ -47,7 +47,7 @@ describe('app.js', () => {
 
   it('should set up the middleware', () => {
     td.verify(this.app.use(this.middleware.elapsedTime));
-    td.verify(this.app.use(this.middleware.responseLogger));
+    td.verify(this.app.use(this.middleware.responseHandler));
   });
 
   it('should set up the router', () => {

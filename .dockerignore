@@ -1,0 +1,11 @@
+# Dependencies
+node_modules
+
+# Logs
+*.log
+
+# Reports
+coverage
+
+# Misc
+.nyc_output
