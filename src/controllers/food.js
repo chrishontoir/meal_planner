@@ -3,6 +3,11 @@ const food = {
     ctx.body = {
       message: 'Get food'
     };
+  },
+  post: (ctx) => {
+    ctx.body = {
+      message: 'Post food'
+    };
   }
 };
 
