@@ -10,8 +10,8 @@ describe('app.js', () => {
     td.replace('koa', Koa);
 
     this.app = new Koa();
-    td.when(this.app.listen('3000', td.matchers.isA(Function)))
-      .thenCallback(null, console.log('Server started on port 3000'));
+    td.when(this.app.listen('3000'))
+      .thenCallback();
 
     this.middleware = {
       elapsedTime: td.function(),
