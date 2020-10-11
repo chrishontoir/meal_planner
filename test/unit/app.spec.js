@@ -2,14 +2,16 @@ const td = require('testdouble');
 const assert = require('assert');
 
 describe('app.js', () => {
-  before(() => {
-    console.log = message => { this.log = message; };
+  before(async () => {
+    this.logs = [];
+    console.log = message => { this.logs.push(message); };
 
     const Koa = td.constructor(['listen', 'use']);
     td.replace('koa', Koa);
 
     this.app = new Koa();
-    td.when(this.app.listen('3000')).thenCallback();
+    td.when(this.app.listen('3000', td.matchers.isA(Function)))
+      .thenCallback(null, console.log('Server started on port 3000'));
 
     this.middleware = {
       elapsedTime: td.function(),
@@ -30,7 +32,6 @@ describe('app.js', () => {
     td.replace('../../src/router', this.router);
 
     this.sut = require('../../src/app');
-    this.sut();
   });
   after(td.reset);
 
@@ -53,6 +54,6 @@ describe('app.js', () => {
   });
 
   it('should console log that the server has started', () => {
-    assert.deepStrictEqual(this.log, 'Server started on port 3000');
+    assert.deepStrictEqual(this.logs.includes('Server started on port 3000'), true);
   });
 });
